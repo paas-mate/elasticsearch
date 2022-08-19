@@ -21,3 +21,5 @@ RUN if [[ "$TARGETARCH" = "amd64" ]]; \
 ENV ELASTICSEARCH_HOME /opt/sh/elasticsearch
 
 WORKDIR /opt/sh/elasticsearch
+
+USER sh
