@@ -23,3 +23,8 @@ ENV ELASTICSEARCH_HOME /opt/sh/elasticsearch
 WORKDIR /opt/sh/elasticsearch
 
 USER sh
+
+EXPOSE 9200
+EXPOSE 9300
+
+ENTRYPOINT [ "/opt/sh/elasticsearch/bin/elasticsearch" ]
