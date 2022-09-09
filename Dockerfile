@@ -3,10 +3,8 @@ FROM ttbb/base
 WORKDIR /opt/sh
 
 ARG TARGETARCH
-
-ARG amd_download=7.17.5-linux-x86_64
-
-ARG arm_download=7.17.5-linux-aarch64
+ARG amd_download=7.17.6-linux-x86_64
+ARG arm_download=7.17.6-linux-aarch64
 
 RUN if [[ "$TARGETARCH" = "amd64" ]]; \
     then download=$amd_download; \
@@ -24,7 +22,6 @@ WORKDIR /opt/sh/elasticsearch
 
 USER sh
 
-EXPOSE 9200
-EXPOSE 9300
+EXPOSE 9200 9300
 
-ENTRYPOINT [ "/opt/sh/elasticsearch/bin/elasticsearch" ]
+ENTRYPOINT [ "/opt/sh/elasticsearch/bin/elasticsearch", "-Ediscovery.type=single-node", "-Enetwork.host=0.0.0.0" ]
