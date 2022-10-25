@@ -13,7 +13,7 @@ RUN if [ "$TARGETARCH" = "amd64" ]; \
     then download=$amd_download; \
     else download=$arm_download; \
     fi && \
-    wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$download.tar.gz && \
+    wget -q https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$download.tar.gz && \
     mkdir elasticsearch && \
     tar -xf elasticsearch-$download.tar.gz -C /opt/elasticsearch --strip-components 1 && \
     rm -rf /opt/elasticsearch-$download.tar.gz && \
