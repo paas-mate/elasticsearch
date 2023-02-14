@@ -55,8 +55,8 @@ jobs:
       - name: Create new release
         uses: softprops/action-gh-release@v1
         with:
-          body: "Latest docker image"
-          name: "latest docker image"
+          body: "Latest 7.x docker image"
+          name: "latest 7.x docker image"
           tag_name: latest_docker_image_7_x
           files: elasticsearch-nake.tar.gz
           draft: false
