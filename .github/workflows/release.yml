@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - main
+      - 7.x
   workflow_dispatch:
 
 permissions:
@@ -29,17 +29,17 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Push to Docker Hub
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ttbb/elasticsearch:nake
+          tags: ttbb/elasticsearch:nake-7
           platforms: linux/amd64,linux/arm64
       - name: Save Docker Images
-        run: docker pull ttbb/elasticsearch:nake;docker save ttbb/elasticsearch:nake -o elasticsearch-nake.tar.gz
+        run: docker pull ttbb/elasticsearch:nake-7;docker save ttbb/elasticsearch:nake-7 -o elasticsearch-nake.tar.gz
       - uses: dev-drprasad/delete-tag-and-release@v0.2.0
         with:
           delete_release: true
-          tag_name: latest_docker_image
+          tag_name: latest_docker_image_7_x
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
 
@@ -47,7 +47,7 @@ jobs:
         uses: tvdias/github-tagger@v0.0.2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          tag: latest_docker_image
+          tag: latest_docker_image_7_x
 
       # Creates the new release with the binary as a release asset.
       # If the previous Action was skipped, then this keeps the same tag as the
@@ -57,7 +57,7 @@ jobs:
         with:
           body: "Latest docker image"
           name: "latest docker image"
-          tag_name: latest_docker_image
+          tag_name: latest_docker_image_7_x
           files: elasticsearch-nake.tar.gz
           draft: false
           prerelease: false
